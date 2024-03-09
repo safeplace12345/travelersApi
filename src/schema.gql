@@ -1,0 +1,85 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Order {
+  numOfSeats: Int!
+  id: String!
+}
+
+type CheckoutOrder {
+  email: String
+  orders: [Order!]
+}
+
+type Cart {
+  email: String!
+  orders: [Order!]!
+  expireAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+}
+
+type Moods {
+  nature: Int!
+  relax: Int!
+  history: Int!
+  culture: Int!
+  party: Int!
+}
+
+type Travel {
+  id: String!
+  name: String!
+  price: Int!
+  slug: String!
+  description: String!
+  startingDate: String!
+  endingDate: String!
+  confirmed: Boolean
+  moods: Moods!
+}
+
+type Query {
+  travels: [Travel!]!
+  travel(travelId: String!): Travel!
+  user(email: String!): User!
+  users: [User!]!
+}
+
+type Mutation {
+  create(createUserInput: CreateUserInput!): User!
+  book(createBooking: CreateBooking!): Cart!
+  checkOut(checkout: Checkout!): [CheckoutOrder!]!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+}
+
+input CreateBooking {
+  email: String!
+  travelId: String!
+  numOfSeats: Int!
+}
+
+input Checkout {
+  amount: Int!
+  orders: [Orders!]!
+  email: String!
+}
+
+input Orders {
+  numOfSeats: Int!
+  id: String!
+}
