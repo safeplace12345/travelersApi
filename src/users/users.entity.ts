@@ -1,6 +1,4 @@
 import { ObjectType, Int, Field, InputType, } from '@nestjs/graphql';
-import {Max} from "class-validator"
-
 
 @ObjectType()
 export class Order {
@@ -65,7 +63,6 @@ export class CreateBooking {
   travelId: string
   
   @Field(() => Int, {nullable: false})
-  @Max(5)
   numOfSeats: number
 }
 
