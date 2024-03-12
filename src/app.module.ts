@@ -13,7 +13,8 @@ import DbService from './lib/db';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: true
+      playground: true,
+      introspection: true
     }),
   ],
   providers: [TravelsService, TravelResolver, UsersService, UserResolver, DbService],
