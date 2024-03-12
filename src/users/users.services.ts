@@ -68,8 +68,6 @@ export class UsersService {
     createBooking: CreateBooking,
   ): Promise<Cart | string | unknown | object> {
     const { email, travelId, numOfSeats } = createBooking;
-    const user = await this.find(email);
-    if (!user) return Promise.reject(this.userExceptionMessage);
 
     try {
       let cart = await cartModel.findOne({ email });
@@ -98,8 +96,6 @@ export class UsersService {
 
   async checkout(checkout: Checkout): Promise<CheckoutOrder[] | string> {
     const { email, orders, amount } = checkout;
-    const user = await this.find(email);
-    if (!user) return Promise.reject(this.userExceptionMessage);
 
     try {
       const travels = await travelsModel.find({
