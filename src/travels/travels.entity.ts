@@ -1,5 +1,5 @@
 import { ObjectType, Int, Field } from '@nestjs/graphql';
-import { DefaultInfo } from 'src/users/users.entity';
+import { DefaultInfo } from 'src/types/objects';
 
 @ObjectType()
 class Moods {
@@ -31,9 +31,6 @@ export class Travel extends DefaultInfo {
 
   @Field()
   endingDate: string;
-
-  @Field({ nullable: true })
-  confirmed?: boolean;
 
   @Field()
   moods: Moods;

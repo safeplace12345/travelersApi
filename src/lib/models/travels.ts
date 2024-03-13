@@ -20,9 +20,6 @@ const travelsSchema = new Schema({
     endingDate: {
         type: String,
     },
-    confirmed: {
-        type: Boolean,
-    },
     moods: {
         nature: {
             type: Number,

@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { User } from './users.entity';
 import {
   CheckoutOrder,
-  Cart,
+  Cart
+} from 'src/types/objects';
+import {
   CreateUserInput,
   CreateBooking,
-  Checkout,
-} from './users.entity';
-import { users } from 'src/lib/travels';
+  Checkout
+} from 'src/types/inputs';
+
 import DbService from 'src/lib/db';
 import {
   ordersModel,
@@ -24,7 +26,6 @@ export class UsersService {
   userExceptionMessage: string;
 
   constructor(private db: DbService) {
-    this.users = users;
     this.userExceptionMessage = 'Unknown user detected';
   }
 
@@ -52,7 +53,7 @@ export class UsersService {
   async create(createUserInput: CreateUserInput): Promise<User> {
     const user: User = {
       ...createUserInput,
-      id: `${Math.random()}`,
+      id: `traveler-${Math.random()}`,
     };
     try {
       const newUser = await usersModel.create(user);
@@ -66,7 +67,7 @@ export class UsersService {
 
   async book(
     createBooking: CreateBooking,
-  ): Promise<Cart | string | unknown | object> {
+  ): Promise<Cart | string | unknown> {
     const { email, travelId, numOfSeats } = createBooking;
 
     try {
@@ -96,7 +97,6 @@ export class UsersService {
 
   async checkout(checkout: Checkout): Promise<CheckoutOrder[] | string> {
     const { email, orders, amount } = checkout;
-
     try {
       const travels = await travelsModel.find({
         id: { $in: [...orders.map((o) => o.id)] },
